@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Loan Solutions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f0f8ff, #e0f0ff);
+      margin: 0;
+      padding: 0;
+      color: #1a3d7c;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #2563eb;
+    }
+    .highlight {
+      color: #16a34a;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #1a3d7c;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1e4ed8;
+    }
+    .faq p {
+      margin: 0.3rem 0;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #16a34a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Student Loan Solutions</h1>
+    <p>Affordable, stress-free loans with <span class="highlight">0% interest for students</span> 🎓</p>
+  </header>
+
+  <div class="container">
+    <!-- Loan Calculator -->
+    <div class="card">
+      <h2>Loan Calculator</h2>
+      <label>Loan Amount ($):</label>
+      <input type="number" id="loanAmount" value="5000"/>
+      
+      <label>Repayment Period (years):</label>
+      <input type="number" id="loanYears" value="5"/>
+      
+      <p class="result">Monthly Payment: <span id="monthlyPayment">$0</span> (0% interest!)</p>
+    </div>
+
+    <!-- Eligibility Checker -->
+    <div class="card">
+      <h2>Eligibility Checker</h2>
+      <button onclick="checkEligibility()">Check Eligibility</button>
+      <p class="result" id="eligibilityResult"></p>
+    </div>
+
+    <!-- Loan Application Form -->
+    <div class="card">
+      <h2>Apply for a Loan</h2>
+      <form onsubmit="event.preventDefault(); alert('Application Submitted (Demo)');">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <input type="text" placeholder="SSN (Demo Only)" required />
+        <input type="number" placeholder="Requested Loan Amount ($)" required />
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <!-- FAQs -->
+    <div class="card faq">
+      <h2>FAQs</h2>
+      <p><strong>Do students really get 0% interest?</strong><br/>Yes! All student borrowers enjoy zero-interest loans during their studies.</p>
+      <p><strong>What’s the max loan amount?</strong><br/>Up to $20,000 with affordable monthly payments.</p>
+      <p><strong>Can I repay early?</strong><br/>Yes, without any penalty.</p>
+    </div>
+  </div>
+
+  <script>
+    function updateCalculator() {
+      const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
+      const years = parseFloat(document.getElementById('loanYears').value) || 1;
+      const monthly = (amount / (years * 12)).toFixed(2);
+      document.getElementById('monthlyPayment').innerText = `$${monthly}`;
+    }
+
+    function checkEligibility() {
+      const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
+      const result = amount <= 20000 ? "✅ Eligible" : "❌ Not Eligible";
+      document.getElementById('eligibilityResult').innerText = result;
+    }
+
+    // Run calculator on load
+    updateCalculator();
+    document.getElementById('loanAmount').addEventListener('input', updateCalculator);
+    document.getElementById('loanYears').addEventListener('input', updateCalculator);
+  </script>
+</body>
+</html>
